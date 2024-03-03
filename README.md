@@ -7,7 +7,7 @@ Periodicaly backup MySQL to S3.
 ## Usage
 
 ```sh
-$ docker run -e SCHEDULE="0 * * * *" -e S3_ACCESS_KEY_ID=key -e S3_SECRET_ACCESS_KEY=secret -e S3_BUCKET=my-bucket -e S3_PREFIX=backup -e MYSQL_USER=user -e MYSQL_PASSWORD=password -e MYSQL_HOST=localhost -e MYSQL_DATABASE=my-db dimavoid/mysql-backup-s3
+$ docker run -e SCHEDULE="0 * * * *" -e MYSQL_HOST=127.0.0.1 -e MYSQL_USER=user -e MYSQL_PASSWORD=password -e MYSQLDUMP_DATABASE=my-db -e S3_ACCESS_KEY_ID=key -e S3_SECRET_ACCESS_KEY=secret -e S3_BUCKET=my-bucket dimavoid/mysql-backup-s3
 ```
 
 docker-compose:
@@ -28,7 +28,7 @@ services:
 ```
 
 ## Environment variables
-- `SCHEDULE` crontab-like syntax to schedule your backups
+- `SCHEDULE` crontab-like syntax to schedule your backups *required*
 - `MYSQL_HOST` the mysql host *required*
 - `MYSQL_PORT` the mysql port (default: 3306)
 - `MYSQL_USER` the mysql user *required*
@@ -40,9 +40,8 @@ services:
 - `S3_ACCESS_KEY_ID` your AWS access key *required*
 - `S3_SECRET_ACCESS_KEY` your AWS secret key *required*
 - `S3_BUCKET` your AWS S3 bucket path *required*
-- `S3_PREFIX` path prefix in your bucket (default: 'backup')
-- `S3_FILENAME` a consistent filename to overwrite with your backup.  If not set will use a timestamp.
-
+- `S3_PREFIX` path prefix in your bucket (default: 'mysql-backup')
+- `S3_FILENAME` a consistent filename to overwrite with your backup. If not set will use a timestamp.
 
 - `S3_S3V4` set to `yes` to enable AWS Signature Version 4, required for [minio](https://minio.io) servers (default: no)
 - `MULTI_DATABASES` Allow to have one file per database if set `yes` default: no)
