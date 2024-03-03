@@ -22,7 +22,6 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQLDUMP_DATABASE: my-db
-      MYSQLDUMP_OPTIONS: --no-tablespaces
       S3_ACCESS_KEY_ID: key
       S3_SECRET_ACCESS_KEY: secret
       S3_BUCKET: my-bucket
